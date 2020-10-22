@@ -31,51 +31,21 @@ def get_data(city):
     return data
 
 def parse_data(data):
-    # day1
-    print('Day 1')
-    for x in range (-1,7):
-        day1times = data['list'][x]['dt_txt']
-        day1temp = data['list'][x]['main']['temp']
-        # day1desc = data['list'][x]['weather']['main']
-        day1wind = data['list'][x]['wind']['speed']
+    forecasts = data['list']
 
-        print(f'Date: {day1times} | Temp: {day1temp} F  | Wind: {day1wind} MPH')
-    print('')
-    print('Day 2')
-    for x in range (7,15):
-            day2times = data['list'][x]['dt_txt']
-            day2temp = data['list'][x]['main']['temp']
-            # day1desc = data['list'][x]['weather']['main']
-            day2wind = data['list'][x]['wind']['speed']
+    for x, forecast in enumerate(forecasts):
 
-            print(f'Date: {day2times} | Temp: {day2temp} F  | Wind: {day2wind} MPH')
-    print('')
-    print('Day 3')
-    for x in range (15,23):
-            day3times = data['list'][x]['dt_txt']
-            day3temp = data['list'][x]['main']['temp']
-            # day1desc = data['list'][x]['weather']['main']
-            day3wind = data['list'][x]['wind']['speed']
+        if (x % 8) == 0:   # 8 forecasts in a day
+            day = x/8 + 1     
+            print(f'Day {day:.0f}')
+            
+        times = forecast['dt_txt']
+        temp = forecast['main']['temp']
+        desc = forecast['weather'][0]['description']  # there's a list in the weather attribute
+        wind = forecast['wind']['speed']
+        print(f'Date: {times} | Temp: {temp} F  | Wind: {wind} MPH {desc}')
 
-            print(f'Date: {day3times} | Temp: {day3temp} F  | Wind: {day3wind} MPH')
-    print('')
-    print('Day 4')
-    for x in range (23,31):
-            day4times = data['list'][x]['dt_txt']
-            day4temp = data['list'][x]['main']['temp']
-            # day1desc = data['list'][x]['weather']['main']
-            day4wind = data['list'][x]['wind']['speed']
 
-            print(f'Date: {day4times} | Temp: {day4temp} F  | Wind: {day4wind} MPH')
-    print('')
-    print('Day 5')
-    for x in range (31,39):
-            day5times = data['list'][x]['dt_txt']
-            day5temp = data['list'][x]['main']['temp']
-            # day1desc = data['list'][x]['weather']['main']
-            day5wind = data['list'][x]['wind']['speed']
-
-            print(f'Date: {day5times} | Temp: {day5temp} F  | Wind: {day5wind} MPH')        
 def main():
 
     city = get_city()
